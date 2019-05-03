@@ -18,28 +18,45 @@ class ShowRankingViewController: UITableViewController {
         // Do any additional setup after loading the view.
     }
     override func viewWillAppear(_ animated: Bool) {
-        self.standingList = self.ranking.getUserScoringList()
+        self.standingList = self.ranking.getUserScoringListDesc()
     }
     // MARK: - Table view data source
     
+
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
     
+    // There isjust one row in every section
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return self.standingList.count
     }
     
+    // Set the spacing between sections
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return AppConfig.tableViewRowSpacing
+    }
+    
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "myCell", for: indexPath)
         
-        cell.textLabel?.text = self.standingList[indexPath.row].name
+        var cell:UITableViewCell
+        
+        if indexPath.row == 0{
+            cell = tableView.dequeueReusableCell(withIdentifier: AppConfig.firstCell, for: indexPath)
+        }else{
+            cell = tableView.dequeueReusableCell(withIdentifier: AppConfig.normalCell, for: indexPath)
+        }
+        
+        if Utils.isEven(number: indexPath.row){
+            cell.backgroundColor = UIColor.BubbleColor.white
+        }
+        let rowNumber = indexPath.row + 1
+        cell.textLabel?.text = "\(rowNumber). \(self.standingList[indexPath.row].name)"
         cell.detailTextLabel?.text = String(self.standingList[indexPath.row].score)
         
         return cell
     }
-    
+   
 
 }

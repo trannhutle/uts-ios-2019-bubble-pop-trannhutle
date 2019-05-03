@@ -22,7 +22,7 @@ class PlayGameViewController: UIViewController {
     var bubbleList: [Bubble] = []
     var stuffedBubble: StuffedBubble! = nil
     var maxBubblesOnFrame = 30
-    var gameDuration = 5
+    var gameDuration = 2
     var lastBubblePoint : Int = 0
     var currentScore: Int = 0
     var ranking: Ranking = Ranking()
@@ -56,6 +56,10 @@ class PlayGameViewController: UIViewController {
     //Play agin
     @IBAction func playAgainTapped(_ sender: UIButton) {
         performSegue(withIdentifier: "playAgainSegue", sender: self)
+    }
+    
+    @IBAction func showRankingTapped(_ sender: UIButton) {
+        performSegue(withIdentifier: "showRankingSegue", sender: self)
     }
     
     // This funftion is called when user turn the orentation of the phone

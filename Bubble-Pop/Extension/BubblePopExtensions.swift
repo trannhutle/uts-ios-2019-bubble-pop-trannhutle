@@ -29,6 +29,9 @@ extension UIColor{
         static var white: UIColor{
             return UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1.0)
         }
+        static var silver: UIColor{
+            return UIColor(red: 214/255, green: 214/255, blue: 214/255, alpha: 1.0)
+        }
     }
 }
 extension UIView {

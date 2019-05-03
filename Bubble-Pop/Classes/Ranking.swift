@@ -34,6 +34,9 @@ class Ranking{
         }
         return scoreList
     }
+    func getUserScoringListDesc() -> [Score]{
+        return self.getUserScoringList().sorted(by: {$0.score > $1.score})
+    }
     private func parseScoreEntityToScoreObject(score: ScoreEntity) -> Score{
         let newScore = Score(name: score.playerName!, score: score.score)
         return newScore

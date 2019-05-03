@@ -67,4 +67,7 @@ class Utils {
         uiImageViewCp.layer.zPosition = 1.0
         return uiImageViewCp
     }
+    static func isEven(number : Int)-> Bool{
+        return number % 2 == 0
+    }
 }
