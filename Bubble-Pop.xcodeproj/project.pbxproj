@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B61242FE227D4A3C00525547 /* BubbleAppButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61242FD227D4A3C00525547 /* BubbleAppButtons.swift */; };
 		B6136673227A6D6A0016DC2A /* BubblePopExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6136672227A6D6A0016DC2A /* BubblePopExtensions.swift */; };
 		B6136675227A717C0016DC2A /* StuffedBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6136674227A717C0016DC2A /* StuffedBubble.swift */; };
 		B613667A227AC05E0016DC2A /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6136679227AC05E0016DC2A /* AppConfig.swift */; };
@@ -30,6 +31,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B61242FD227D4A3C00525547 /* BubbleAppButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleAppButtons.swift; sourceTree = "<group>"; };
 		B6136672227A6D6A0016DC2A /* BubblePopExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubblePopExtensions.swift; sourceTree = "<group>"; };
 		B6136674227A717C0016DC2A /* StuffedBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StuffedBubble.swift; sourceTree = "<group>"; };
 		B6136679227AC05E0016DC2A /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
@@ -65,6 +67,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B61242FC227D49E400525547 /* Control Layouts */ = {
+			isa = PBXGroup;
+			children = (
+				B61242FD227D4A3C00525547 /* BubbleAppButtons.swift */,
+			);
+			path = "Control Layouts";
+			sourceTree = "<group>";
+		};
 		B6136670227A6D250016DC2A /* Extension */ = {
 			isa = PBXGroup;
 			children = (
@@ -136,6 +146,7 @@
 		B618A050225B2293002CD8BF /* Bubble-Pop */ = {
 			isa = PBXGroup;
 			children = (
+				B61242FC227D49E400525547 /* Control Layouts */,
 				B613667E227B398B0016DC2A /* Entities */,
 				B613667B227AE0E50016DC2A /* Storyboards */,
 				B6136678227AC0410016DC2A /* App Configuration */,
@@ -247,6 +258,7 @@
 				B614B862227C3FB1005E58FC /* ShowRankingViewController.swift in Sources */,
 				B6136673227A6D6A0016DC2A /* BubblePopExtensions.swift in Sources */,
 				B6617A5E2276D55E00635984 /* PlayGameViewController.swift in Sources */,
+				B61242FE227D4A3C00525547 /* BubbleAppButtons.swift in Sources */,
 				B66D0A662275DEDD003F3658 /* GameSettingViewController.swift in Sources */,
 				B6136680227B39A70016DC2A /* Score.swift in Sources */,
 				B618A067225B2702002CD8BF /* StartGameController.swift in Sources */,
