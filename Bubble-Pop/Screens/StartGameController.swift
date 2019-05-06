@@ -10,35 +10,65 @@ import UIKit
 
 class PlayGameController: UIViewController {
 
-    var playerName : String = ""
     
     @IBOutlet weak var playerNameField: UITextField!
+    @IBOutlet weak var playGameBtn: RoundButton!
+    @IBOutlet weak var playGameWithDefaultBtn: RoundButton!
+    @IBOutlet weak var enterPlayerNameLbl: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
+    var gameDuration = 0
+    var numberOfBubbles = 0
+    var playerName : String = ""
+
+    @IBAction func settingBtnTapped(_ sender: RoundButton) {
+        performSegue(withIdentifier: "showGameSettingSegue", sender: self)
+    }
     
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        var gameSettingController = segue.destination as!
-//    }
+    @IBAction func rankingBtnTapped(_ sender: RoundButton) {
+        performSegue(withIdentifier: "showRankingSegue", sender: self)
+    }
+    @IBAction func playGameWithDefaultBtnTapped(_ sender: Any) {
+        self.playGame(isDefaultMode: true)
+    }
     
-    @IBAction func submitPlayerName(_ sender: UIButton) {
-        print("The input from user: \(playerNameField.text!)" )
-        if playerNameField.text != ""{
-            performSegue(withIdentifier: "showGameSettingSegue", sender: self)
+    @IBAction func playGameBtnTapped(_ sender: RoundButton) {
+        self.playGame(isDefaultMode: false)
+    }
+    
+    private func playGame(isDefaultMode: Bool){
+        
+        if self.playerNameField.text != ""{
+           
+            // Set default mode
+            if isDefaultMode{
+                self.gameDuration =  AppConfig.defaultGameDuration
+                self.numberOfBubbles = AppConfig.defaultNumberOfBubbles
+            }else{
+                self.gameDuration =  GameSettingViewController.getGameDuration()
+                self.numberOfBubbles = GameSettingViewController.getNumberOfBubble()
+            }
+            self.playerName = self.playerNameField.text!
+            
+            performSegue(withIdentifier: "playGameSegue", sender: self)
+            
+        }else{
+            BubbleAnimation.showEmptyTextFieldAnimation(component: self.enterPlayerNameLbl)
         }
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    // Prepare data data for send data to
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+        if segue.identifier == "playGameSegue"{
+            let playGameVC = segue.destination as! PlayGameViewController
+            playGameVC.gameDuration = self.gameDuration
+            playGameVC.maxBubblesOnFrame = self.numberOfBubbles
+            playGameVC.playerName = self.playerName
+        }
+        
 
+    }
 }

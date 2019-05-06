@@ -16,5 +16,8 @@ struct AppConfig{
     static let tableViewRowSpacing = CGFloat(10)
     static let normalCell = "normalCell"
     static let firstCell = "firstCell"
+    
+    static let defaultGameDuration = 10
+    static let defaultNumberOfBubbles = 15
 
 }

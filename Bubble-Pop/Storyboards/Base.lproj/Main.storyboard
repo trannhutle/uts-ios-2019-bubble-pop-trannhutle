@@ -7,13 +7,14 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Play Game Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="PlayGameController" customModule="Bubble_Pop" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="startGameController" id="BYZ-38-t0r" customClass="PlayGameController" customModule="Bubble_Pop" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -63,7 +64,7 @@ GAME</string>
                                                                 <rect key="frame" x="0.0" y="39" width="331" height="30"/>
                                                                 <nil key="textColor"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                <textInputTraits key="textInputTraits" autocapitalizationType="words" keyboardType="namePhonePad" keyboardAppearance="alert" returnKeyType="go" secureTextEntry="YES" textContentType="name"/>
+                                                                <textInputTraits key="textInputTraits" autocapitalizationType="words" keyboardType="namePhonePad" keyboardAppearance="alert" returnKeyType="go" textContentType="name"/>
                                                             </textField>
                                                         </subviews>
                                                     </stackView>
@@ -97,7 +98,7 @@ GAME</string>
                                                                             </userDefinedRuntimeAttribute>
                                                                         </userDefinedRuntimeAttributes>
                                                                         <connections>
-                                                                            <action selector="submitPlayerName:" destination="BYZ-38-t0r" eventType="touchUpInside" id="T4D-nR-IKx"/>
+                                                                            <action selector="playGameBtnTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="c9i-T1-wkg"/>
                                                                         </connections>
                                                                     </button>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KgI-jv-Ysq" customClass="RoundButton" customModule="Bubble_Pop" customModuleProvider="target">
@@ -123,7 +124,7 @@ GAME</string>
                                                                             </userDefinedRuntimeAttribute>
                                                                         </userDefinedRuntimeAttributes>
                                                                         <connections>
-                                                                            <action selector="submitPlayerName:" destination="BYZ-38-t0r" eventType="touchUpInside" id="2OZ-hQ-CTZ"/>
+                                                                            <action selector="settingBtnTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5PS-Rc-xeS"/>
                                                                         </connections>
                                                                     </button>
                                                                 </subviews>
@@ -160,7 +161,7 @@ GAME</string>
                                                                             </userDefinedRuntimeAttribute>
                                                                         </userDefinedRuntimeAttributes>
                                                                         <connections>
-                                                                            <action selector="submitPlayerName:" destination="BYZ-38-t0r" eventType="touchUpInside" id="DMF-bx-MjC"/>
+                                                                            <action selector="playGameWithDefaultBtnTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="IK9-ZZ-uRm"/>
                                                                         </connections>
                                                                     </button>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hVW-cG-HCz" customClass="RoundButton" customModule="Bubble_Pop" customModuleProvider="target">
@@ -187,7 +188,8 @@ GAME</string>
                                                                             </userDefinedRuntimeAttribute>
                                                                         </userDefinedRuntimeAttributes>
                                                                         <connections>
-                                                                            <action selector="submitPlayerName:" destination="BYZ-38-t0r" eventType="touchUpInside" id="m3G-pX-F7z"/>
+                                                                            <action selector="rankingBtnTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ge0-eu-LWP"/>
+                                                                            <segue destination="uDg-xW-aKN" kind="show" identifier="showRankingSegue" id="7k0-fL-5lA"/>
                                                                         </connections>
                                                                     </button>
                                                                 </subviews>
@@ -247,10 +249,12 @@ GAME</string>
                     </view>
                     <navigationItem key="navigationItem" id="B8P-y5-RXU"/>
                     <connections>
+                        <outlet property="enterPlayerNameLbl" destination="hUT-nn-QxY" id="M1m-vv-B7e"/>
+                        <outlet property="playGameBtn" destination="Vob-Mp-1uu" id="6hq-mj-wwf"/>
+                        <outlet property="playGameWithDefaultBtn" destination="9Gr-ZH-4zg" id="7b8-Ro-WOV"/>
                         <outlet property="playerNameField" destination="NOb-O2-Cij" id="BYZ-jd-wMA"/>
                         <segue destination="CRj-Kc-wZy" kind="show" identifier="showGameSettingSegue" id="WIV-Np-PNw"/>
                         <segue destination="XPM-7F-Sku" kind="show" identifier="playGameSegue" id="RTl-uN-VoZ"/>
-                        <segue destination="uDg-xW-aKN" kind="show" identifier="showRankingSegue" id="94J-BV-W7x"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -308,7 +312,7 @@ GAME</string>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Osv-cT-Hff">
                                                     <rect key="frame" x="0.0" y="20" width="414" height="59.5"/>
                                                     <subviews>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="4CY-Y0-0eZ">
+                                                        <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="4CY-Y0-0eZ">
                                                             <rect key="frame" x="0.0" y="0.0" width="414" height="30"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10 s" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cdA-pz-LgZ">
@@ -317,11 +321,11 @@ GAME</string>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="20" minValue="1" maxValue="60" translatesAutoresizingMaskIntoConstraints="NO" id="pMf-NK-E32">
-                                                                    <rect key="frame" x="53" y="0.0" width="304.5" height="31"/>
-                                                                    <color key="minimumTrackTintColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                    <color key="maximumTrackTintColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                    <color key="thumbTintColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <slider opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="20" minValue="1" maxValue="60" translatesAutoresizingMaskIntoConstraints="NO" id="pMf-NK-E32">
+                                                                    <rect key="frame" x="51" y="0.0" width="308.5" height="31"/>
+                                                                    <color key="minimumTrackTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    <color key="maximumTrackTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    <color key="thumbTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <connections>
                                                                         <action selector="durationSlideChanged:" destination="CRj-Kc-wZy" eventType="valueChanged" id="lBJ-TT-zm1"/>
                                                                     </connections>
@@ -341,6 +345,10 @@ GAME</string>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="4CY-Y0-0eZ" firstAttribute="leading" secondItem="Osv-cT-Hff" secondAttribute="leading" id="RiL-Re-1ie"/>
+                                                        <constraint firstAttribute="trailing" secondItem="4CY-Y0-0eZ" secondAttribute="trailing" id="efe-yY-gnB"/>
+                                                    </constraints>
                                                 </stackView>
                                             </subviews>
                                             <constraints>
@@ -392,7 +400,7 @@ GAME</string>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="5" minValue="1" maxValue="15" translatesAutoresizingMaskIntoConstraints="NO" id="Q4A-3M-Cil">
+                                                                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="15" minValue="3" maxValue="30" translatesAutoresizingMaskIntoConstraints="NO" id="Q4A-3M-Cil">
                                                                     <rect key="frame" x="39.5" y="0.0" width="323.5" height="26"/>
                                                                     <color key="minimumTrackTintColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <color key="maximumTrackTintColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -409,13 +417,17 @@ GAME</string>
                                                                 </label>
                                                             </subviews>
                                                         </stackView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ccy-ji-Ku0">
-                                                            <rect key="frame" x="195.5" y="25" width="23.5" height="24.5"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="15" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ccy-ji-Ku0">
+                                                            <rect key="frame" x="195.5" y="25" width="23" height="24.5"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="jff-zR-6pV" firstAttribute="leading" secondItem="fqH-3Q-Wcx" secondAttribute="leading" id="qih-Yg-WrR"/>
+                                                        <constraint firstAttribute="trailing" secondItem="jff-zR-6pV" secondAttribute="trailing" id="umM-fa-LHS"/>
+                                                    </constraints>
                                                 </stackView>
                                             </subviews>
                                             <constraints>
@@ -454,8 +466,7 @@ GAME</string>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                     <connections>
-                                                        <action selector="playGameBtnTapped:" destination="CRj-Kc-wZy" eventType="touchUpInside" id="sex-qO-CaK"/>
-                                                        <action selector="submitPlayerName:" destination="BYZ-38-t0r" eventType="touchUpInside" id="DfG-tq-qBc"/>
+                                                        <action selector="saveSetting:" destination="CRj-Kc-wZy" eventType="touchUpInside" id="Bj5-qg-TCL"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -488,7 +499,7 @@ GAME</string>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HBL-Vb-QZd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="535" y="1718"/>
+            <point key="canvasLocation" x="-6" y="1718"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="w6n-VA-fKK">
@@ -504,7 +515,7 @@ GAME</string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYY-Vb-J0z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="214" y="4"/>
+            <point key="canvasLocation" x="-400" y="901"/>
         </scene>
         <!--Show Ranking View Controller-->
         <scene sceneID="VtN-3r-5Rr">
@@ -589,12 +600,12 @@ GAME</string>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H3i-6K-j6X" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3202" y="901"/>
+            <point key="canvasLocation" x="2333" y="1718"/>
         </scene>
         <!--Play Game View Controller-->
         <scene sceneID="abc-Gn-RJi">
             <objects>
-                <viewController id="XPM-7F-Sku" customClass="PlayGameViewController" customModule="Bubble_Pop" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="playGameViewController" id="XPM-7F-Sku" customClass="PlayGameViewController" customModule="Bubble_Pop" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vNm-w7-VZr" customClass="SKView">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -632,7 +643,7 @@ GAME</string>
                                                         </state>
                                                         <connections>
                                                             <action selector="playAgainTapped:" destination="XPM-7F-Sku" eventType="touchUpInside" id="zCi-Ql-wv5"/>
-                                                            <segue destination="XPM-7F-Sku" kind="show" identifier="playAgainSegue" id="e2x-AE-Tt3"/>
+                                                            <segue destination="XPM-7F-Sku" kind="show" identifier="playAgainSegue" id="IXn-V7-6bA"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZBw-qV-EUd">
@@ -647,7 +658,7 @@ GAME</string>
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
                                                         <connections>
-                                                            <action selector="showRankingTapped:" destination="XPM-7F-Sku" eventType="touchUpInside" id="jiU-vO-gc5"/>
+                                                            <segue destination="uDg-xW-aKN" kind="show" identifier="showRankingSegue" id="rn1-Mt-KLw"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -781,6 +792,7 @@ GAME</string>
                     <connections>
                         <outlet property="bubbleDisplayFrame" destination="ATa-D8-4dp" id="aPd-No-zzg"/>
                         <outlet property="buttonGroupStack" destination="Iwd-K3-oBP" id="jY0-cc-pYG"/>
+                        <outlet property="playerNameLbl" destination="A62-eA-DLW" id="tly-OS-ZMh"/>
                         <outlet property="scoreLbl" destination="hYE-0K-toY" id="n8l-bI-CCi"/>
                         <outlet property="startGameTimerLbl" destination="IbG-mf-Uzk" id="g9J-hE-7e8"/>
                         <outlet property="timerLbl" destination="zvf-WZ-Dfn" id="2Bt-XO-p0N"/>
@@ -790,11 +802,14 @@ GAME</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vaU-kI-5hJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1680" y="1384"/>
+            <point key="canvasLocation" x="1142" y="1718"/>
         </scene>
     </scenes>
     <resources>
         <image name="trophy" width="225" height="225"/>
         <image name="utsLogo" width="209" height="88.5"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="rn1-Mt-KLw"/>
+    </inferredMetricsTieBreakers>
 </document>

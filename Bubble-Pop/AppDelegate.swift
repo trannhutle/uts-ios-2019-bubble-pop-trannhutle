@@ -22,7 +22,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func getStandingList() -> [ScoreEntity]{
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "ScoreEntity")
-        
         do{
             return try persistentContainer.viewContext.fetch(fetchRequest) as! [ScoreEntity]
         }catch{

@@ -17,12 +17,15 @@ class PlayGameViewController: UIViewController {
     @IBOutlet weak var topOneImgView: UIImageView!
     @IBOutlet weak var startGameTimerLbl: UILabel!
     @IBOutlet weak var buttonGroupStack: UIView!
+    @IBOutlet weak var playerNameLbl: UILabel!
     
     var gameTimer: Timer?
+    var countDownTimer: Timer?
     var bubbleList: [Bubble] = []
     var stuffedBubble: StuffedBubble! = nil
-    var maxBubblesOnFrame = 30
-    var gameDuration = 2
+    var maxBubblesOnFrame = AppConfig.defaultNumberOfBubbles
+    var gameDuration = AppConfig.defaultGameDuration
+    var playerName = ""
     var lastBubblePoint : Int = 0
     var currentScore: Int = 0
     var ranking: Ranking = Ranking()
@@ -46,22 +49,36 @@ class PlayGameViewController: UIViewController {
     }
     @IBAction func bubbleIsTouched(_ sender: Bubble){
         
+        let scoreLblMidX = self.scoreLbl.frame.origin.x
+        let scoreLblMidY = self.scoreLbl.frame.origin.y
+
+        Utils.changeFrame(view: sender, toOriginX: scoreLblMidX, toOriginY: scoreLblMidY, toWidth: 5,  toHeight: 5, duration: 0.5)
+        
         print("Get touch event")
         
         let bubble = sender
         self.updateViewAfterTouchBubble(bubble: bubble)
-        bubble.removeFromSuperview()
+//        bubble.removeFromSuperview()
         
     }
-    //Play agin
+    //When btn play again is tapped, the segue would call this current VC and this function is triggered to remove all the history VC
     @IBAction func playAgainTapped(_ sender: UIButton) {
-        performSegue(withIdentifier: "playAgainSegue", sender: self)
+        
+        var navigationArray = self.navigationController?.viewControllers //To get all UIViewController stack as Array
+        navigationArray!.remove(at: (navigationArray?.count)! - 2) // To remove previous UIViewController
+        self.navigationController?.viewControllers = navigationArray!
     }
-    
-    @IBAction func showRankingTapped(_ sender: UIButton) {
-        performSegue(withIdentifier: "showRankingSegue", sender: self)
+   
+    // unbind the timer at the current screen
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        
+        if self.isMovingFromParent
+        {
+            self.gameTimer?.invalidate()
+            self.countDownTimer?.invalidate()
+        }
     }
-    
     // This funftion is called when user turn the orentation of the phone
     // clear all the bubble on the screen, generate the new ones
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -74,13 +91,15 @@ class PlayGameViewController: UIViewController {
             self.bubbleList = self.stuffedBubble.sprawBubblesToFrame(numberOfBubbles: self.bubbleList.count,currentBubbleList: [])
         })
     }
+    
+
     func getBubbleDisplayFrame() ->UIView {
         return self.bubbleDisplayFrame
     }
     private func showStartGameCountdown(){
         // Show timer to start game
         var startTimeCountDown = 2
-        let _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: true){
+        self.countDownTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true){
             startGameTimer in
             
             self.startGameTimerLbl.text = String(startTimeCountDown)
@@ -88,7 +107,7 @@ class PlayGameViewController: UIViewController {
             
             print (startTimeCountDown)
             if startTimeCountDown == 0{
-                self.startGameTimerLbl.removeFromSuperview()
+                self.startGameTimerLbl.isHidden = true
                 startGameTimer.invalidate()
                 
                 // Triiger function to playing game
@@ -103,7 +122,7 @@ class PlayGameViewController: UIViewController {
 
         // Spraw the bubble on the screen
         self.stuffedBubble.refreshBubbleDisplayFrame(playGameScreen: self)
-        self.bubbleList = self.stuffedBubble.sprawBubblesToFrame(numberOfBubbles: 30, currentBubbleList: self.bubbleList)
+        self.bubbleList = self.stuffedBubble.sprawBubblesToFrame(numberOfBubbles: self.maxBubblesOnFrame, currentBubbleList: self.bubbleList)
         
         // Set actions during the time interval
         self.gameTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true){
@@ -127,7 +146,7 @@ class PlayGameViewController: UIViewController {
         self.setupLayoutForGameEnding()
         
         // Save score to db
-        self.ranking.persistNewScoring(playerName: "Test", score: Int16(self.currentScore))
+        self.ranking.persistNewScoring(playerName: self.playerName, score: Int16(self.currentScore))
     }
     
     private func setupLayoutForGameEnding(){
@@ -200,6 +219,9 @@ class PlayGameViewController: UIViewController {
     }
     
     private func setupScreenLayout(){
+        //Set user player name
+        self.playerNameLbl.text = "\(self.playerName)\" score"
+        
         //Set border for the lable
         self.timerLbl.layer.borderWidth = 1.0
         self.timerLbl.text = String(self.gameDuration)
@@ -213,5 +235,16 @@ class PlayGameViewController: UIViewController {
             self.currentHighestScore = Int(highestScore!.score)
             self.topOneScoringLbl.text = String(highestScore!.score)
         }
+        
+        // Disable all the touch event for bubble
+        self.bubbleDisplayFrame.isUserInteractionEnabled = true
+        // Hide the bottom button for going to ranking or replay the game
+        self.buttonGroupStack.isHidden = true
+        self.buttonGroupStack.layer.zPosition = 1.0
+        
+        // Enable the capacity of the bubble display frame
+        self.bubbleDisplayFrame.layer.opacity = 1.0
+        
     }
+    
 }
