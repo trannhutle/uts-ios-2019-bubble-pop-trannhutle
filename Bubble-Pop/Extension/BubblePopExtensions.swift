@@ -41,6 +41,24 @@ extension UIView {
             CAMediaTimingFunctionName.easeInEaseOut)
         animation.type = CATransitionType.fade
         animation.duration = duration
+        animation.isRemovedOnCompletion = true
         layer.add(animation, forKey: CATransitionType.fade.rawValue)
+    }
+    func fadeDelete(_ duration:CFTimeInterval) {
+        UIView.animate(withDuration: duration, delay: 0.0, options: UIView.AnimationOptions.curveEaseIn, animations: {
+            self.alpha = 0.0
+        }, completion: { (finished: Bool) in
+            self.removeFromSuperview()
+        })
+    }
 }
+
+extension UIViewController{
+    func hideKeyboard(){
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        self.view.addGestureRecognizer(tap)
+    }
+    @objc func dismissKeyboard(){
+        self.view.endEditing(true)
+    }
 }

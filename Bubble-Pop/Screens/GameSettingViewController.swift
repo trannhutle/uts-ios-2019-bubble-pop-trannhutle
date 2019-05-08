@@ -12,6 +12,8 @@ class GameSettingViewController: UITableViewController {
     
     @IBOutlet weak var gameDurationLbl: UILabel!
     @IBOutlet weak var numberOfBubbleLbl: UILabel!
+    @IBOutlet weak var gameDurationSlider: UISlider!
+    @IBOutlet weak var numberOfBubblesSlider: UISlider!
     
     // This is the common variable for
     private static var gameDuration: Int = AppConfig.defaultGameDuration
@@ -23,14 +25,16 @@ class GameSettingViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        gameDurationLbl.text = "\(GameSettingViewController.gameDuration)s"
-        numberOfBubbleLbl.text = "\(GameSettingViewController.numberOfBUbbles)"
+        // Set up view
+        self.gameDurationLbl.text = "\(GameSettingViewController.gameDuration)s"
+        self.numberOfBubbleLbl.text = "\(GameSettingViewController.numberOfBUbbles)"
+        self.numberOfBubblesSlider.value = Float(GameSettingViewController.numberOfBUbbles)
+        self.gameDurationSlider.value = Float(GameSettingViewController.gameDuration)
         
         // Set the current static to current setting
         self.currentGameDuration = GameSettingViewController.gameDuration
         self.currentNumberOfBubbles = GameSettingViewController.numberOfBUbbles
-
-        // Do any additional setup after loading the view.
+        
     }
     
     @IBAction func durationSlideChanged(_ sender: UISlider) {
@@ -45,13 +49,6 @@ class GameSettingViewController: UITableViewController {
         numberOfBubbleLbl.text = "\(sliderValue)"
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        if self.isMovingToParent{
-            
-        }
-    }
     @IBAction func saveSetting(_ sender: Any) {
         GameSettingViewController.gameDuration = self.currentGameDuration
         GameSettingViewController.numberOfBUbbles = self.currentNumberOfBubbles
@@ -62,13 +59,13 @@ class GameSettingViewController: UITableViewController {
     public static func getGameDuration() -> Int{
         return GameSettingViewController.gameDuration
     }
-    public static func setGameDuration(gameDuration: Int){
+    public func setGameDuration(gameDuration: Int){
         GameSettingViewController.gameDuration = gameDuration
     }
     public static func getNumberOfBubble() -> Int{
         return GameSettingViewController.numberOfBUbbles
     }
-    public static func setNumberOfBubble(numberOfBubble: Int){
+    public  func setNumberOfBubble(numberOfBubble: Int){
         GameSettingViewController.numberOfBUbbles = numberOfBubble
     }
     /*

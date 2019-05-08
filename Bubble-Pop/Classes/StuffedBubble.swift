@@ -29,10 +29,10 @@ class StuffedBubble{
         return self.bubbleList
     }
     func removeBubbles(bubbleList: [Bubble]) -> [Bubble]{
-        let randomBubbleIndex = Utils.randomNumbersInRange(maxNumber: bubbleList.count)
+        let randomBubbleIndex = Utils.randomIntInRange(maxNumber: bubbleList.count)
         var bubbleList = bubbleList
         for i in randomBubbleIndex{
-            bubbleList[i].removeFromSuperview()
+            bubbleList[i].fadeDelete(0.1)
         }
         for i in randomBubbleIndex.sorted(by: >){
             bubbleList.remove(at: i)
@@ -44,22 +44,28 @@ class StuffedBubble{
             bubble.removeFromSuperview()
         }
     }
+    func resetBubbleVelocity(bubbleList: [Bubble]){
+        for i in 0..<bubbleList.count{
+            bubbleList[i].setVelocity()
+        }
+    }
     private func addBubble(){
         var isIntersected = true
         while isIntersected {
-            // Innitialise the position of the bubble on the frame
+
             let bubblePosition = self.getBubbleLocationInFrame()
             let tempPositionView = UIView(frame: bubblePosition)
-            // Tmporary add the bubble to the view
             self.playGameScreen.getBubbleDisplayFrame().addSubview(tempPositionView)
-            // Check if the position is intersected with the others
             if !checkIntersecting(view: tempPositionView){
+
                 let bubble = Bubble(frame: bubblePosition)
                 
                 bubble.layer.zPosition = 0.3
                 
                 bubble.addTarget(self.playGameScreen, action: #selector(self.playGameScreen.bubbleIsTouched(_:)), for: UIControl.Event.touchUpInside)
+
                 self.playGameScreen.getBubbleDisplayFrame().addSubview(bubble)
+
                 bubbleList.append(bubble)
                 isIntersected = false
             }
@@ -79,7 +85,9 @@ class StuffedBubble{
         let maxY = Float(self.frameHeight)
         let offsetY: Float = 0.0
         let randomPosition = Utils.randomPositionInsideFrame(maxX: maxX, offsetX: offsetX, maxY: maxY, offsetY: offsetY)
-        let size =  CGSize(width: 50, height: 50)
+        // Random bubble size
+        let randomSize: CGFloat = CGFloat(Utils.randomFloatBetween(smallNumber: 30, bigNumber: 70))
+        let size =  CGSize(width: randomSize, height: randomSize)
         return CGRect(origin: randomPosition, size: size)
     }
     private func checkIntersecting(view: UIView) -> Bool{

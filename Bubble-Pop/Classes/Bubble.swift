@@ -23,7 +23,7 @@ class Bubble: UIButton{
     var colour: CGColor = UIColor.BubbleColor.white.cgColor
     var points: BubbleCategory = BubbleCategory.none
     var velocity: Double = 0.0
-    
+    var timer: Timer?
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -73,8 +73,24 @@ class Bubble: UIButton{
             self.colour = UIColor.BubbleColor.white.cgColor
             self.points = .none
         }
-        
+        self.setVelocity()
+    }
+    
+    func setVelocity() {
+        self.velocity = Double(-1.0)
 
+        if let existingTimer = timer {
+            existingTimer.invalidate()
+        }
+
+        self.timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true, block: { (timer: Timer) in
+            if UIDevice.current.orientation.isLandscape {
+                self.center = CGPoint(x: self.center.x , y: self.center.y - CGFloat(self.velocity))
+            } else {
+                self.center = CGPoint(x: self.center.x, y: self.center.y - CGFloat(self.velocity))
+            }
+        })
+        self.timer!.fire()
     }
     
 }

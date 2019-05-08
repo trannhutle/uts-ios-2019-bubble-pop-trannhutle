@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PlayGameController: UIViewController {
+class PlayGameController: UIViewController, UITextFieldDelegate {
 
     
     @IBOutlet weak var playerNameField: UITextField!
@@ -18,13 +18,15 @@ class PlayGameController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        self.hideKeyboard()
+//        self.playerNameField.bec omeFirstResponder()
         // Do any additional setup after loading the view.
     }
     var gameDuration = 0
     var numberOfBubbles = 0
     var playerName : String = ""
-
+    
     @IBAction func settingBtnTapped(_ sender: RoundButton) {
         performSegue(withIdentifier: "showGameSettingSegue", sender: self)
     }
@@ -67,8 +69,15 @@ class PlayGameController: UIViewController {
             playGameVC.gameDuration = self.gameDuration
             playGameVC.maxBubblesOnFrame = self.numberOfBubbles
             playGameVC.playerName = self.playerName
-        }
+        }else if segue.identifier == "playGameSegue" {
+            let settingGame = segue.destination as! GameSettingViewController
         
-
+            settingGame.setGameDuration(gameDuration: self.gameDuration)
+            settingGame.setNumberOfBubble(numberOfBubble: self.numberOfBubbles)
+        }
+    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
     }
 }

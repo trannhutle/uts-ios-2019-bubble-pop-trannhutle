@@ -17,7 +17,12 @@ class Utils {
         let y = CGFloat( self.randomProbability() * maxY + offsetY)
         return CGPoint(x: x, y: y)
     }
-    static func randomNumbersInRange(maxNumber: Int) -> [Int]{
+    
+    static func randomFloatBetween(smallNumber: Float, bigNumber: Float) -> Float {
+        let diff: Float = bigNumber - smallNumber
+        return ((Float(UInt(arc4random()) % (UInt(RAND_MAX) + 1)) / Float(RAND_MAX)) * diff) + smallNumber
+    }
+    static func randomIntInRange(maxNumber: Int) -> [Int]{
         var randomNunbers  = Set<Int>()
         
         let listSize = Int(arc4random_uniform(UInt32(maxNumber))) + 1
@@ -28,7 +33,6 @@ class Utils {
             randomNunbers.insert(randomNumb)
         }
         print ("random index to remove: \(randomNunbers)")
-
         return Array(randomNunbers)
     }
     // This function is referenced from https://stackoverflow.com/questions/44769265/how-to-animate-scaling-and-moving-a-uilabel-then-set-its-transform-back-to-the?rq=1

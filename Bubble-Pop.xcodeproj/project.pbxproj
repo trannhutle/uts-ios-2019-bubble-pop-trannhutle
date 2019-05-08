@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B610594D2282DC2200058DB5 /* PlaySound.swift in Sources */ = {isa = PBXBuildFile; fileRef = B610594C2282DC2200058DB5 /* PlaySound.swift */; };
+		B610594F2282E1F000058DB5 /* bubblePopSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B610594E2282E1F000058DB5 /* bubblePopSound.mp3 */; };
+		B61059542282EA0A00058DB5 /* gameOver.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B61059532282EA0A00058DB5 /* gameOver.mp3 */; };
+		B61059562282FB6A00058DB5 /* newHighScore.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B61059552282FB6A00058DB5 /* newHighScore.mp3 */; };
 		B61242FE227D4A3C00525547 /* BubbleAppButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61242FD227D4A3C00525547 /* BubbleAppButtons.swift */; };
 		B6136673227A6D6A0016DC2A /* BubblePopExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6136672227A6D6A0016DC2A /* BubblePopExtensions.swift */; };
 		B6136675227A717C0016DC2A /* StuffedBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6136674227A717C0016DC2A /* StuffedBubble.swift */; };
@@ -31,6 +35,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B610594C2282DC2200058DB5 /* PlaySound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaySound.swift; sourceTree = "<group>"; };
+		B610594E2282E1F000058DB5 /* bubblePopSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bubblePopSound.mp3; sourceTree = "<group>"; };
+		B61059532282EA0A00058DB5 /* gameOver.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = gameOver.mp3; sourceTree = "<group>"; };
+		B61059552282FB6A00058DB5 /* newHighScore.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = newHighScore.mp3; sourceTree = "<group>"; };
 		B61242FD227D4A3C00525547 /* BubbleAppButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleAppButtons.swift; sourceTree = "<group>"; };
 		B6136672227A6D6A0016DC2A /* BubblePopExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubblePopExtensions.swift; sourceTree = "<group>"; };
 		B6136674227A717C0016DC2A /* StuffedBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StuffedBubble.swift; sourceTree = "<group>"; };
@@ -67,6 +75,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B61059522282E86000058DB5 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				B61059552282FB6A00058DB5 /* newHighScore.mp3 */,
+				B61059532282EA0A00058DB5 /* gameOver.mp3 */,
+				B610594E2282E1F000058DB5 /* bubblePopSound.mp3 */,
+			);
+			path = Sounds;
+			sourceTree = "<group>";
+		};
 		B61242FC227D49E400525547 /* Control Layouts */ = {
 			isa = PBXGroup;
 			children = (
@@ -115,6 +133,7 @@
 				B6136674227A717C0016DC2A /* StuffedBubble.swift */,
 				B613667C227B34E80016DC2A /* Ranking.swift */,
 				B614B85F227C36B2005E58FC /* Animation.swift */,
+				B610594C2282DC2200058DB5 /* PlaySound.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -146,6 +165,7 @@
 		B618A050225B2293002CD8BF /* Bubble-Pop */ = {
 			isa = PBXGroup;
 			children = (
+				B61059522282E86000058DB5 /* Sounds */,
 				B61242FC227D49E400525547 /* Control Layouts */,
 				B613667E227B398B0016DC2A /* Entities */,
 				B613667B227AE0E50016DC2A /* Storyboards */,
@@ -236,8 +256,11 @@
 			files = (
 				B618A05F225B2294002CD8BF /* LaunchScreen.storyboard in Resources */,
 				B6136689227B59740016DC2A /* Images.xcassets in Resources */,
+				B61059542282EA0A00058DB5 /* gameOver.mp3 in Resources */,
 				B618A05C225B2294002CD8BF /* Assets.xcassets in Resources */,
+				B61059562282FB6A00058DB5 /* newHighScore.mp3 in Resources */,
 				B618A057225B2293002CD8BF /* Main.storyboard in Resources */,
+				B610594F2282E1F000058DB5 /* bubblePopSound.mp3 in Resources */,
 				B6136687227B4AEE0016DC2A /* EnglishInfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -265,6 +288,7 @@
 				B613667D227B34E80016DC2A /* Ranking.swift in Sources */,
 				B614B860227C36B2005E58FC /* Animation.swift in Sources */,
 				B6136675227A717C0016DC2A /* StuffedBubble.swift in Sources */,
+				B610594D2282DC2200058DB5 /* PlaySound.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
