@@ -13,13 +13,16 @@ class PlaySound{
     static var player: AVAudioPlayer?
     
     static func playBubbleSound() {
-        playASound(soundFileName: "bubblePopSound", fileExtension: "mp3")
+        playASound(soundFileName: AppConfig.bubblePopSound, fileExtension: AppConfig.mp3Extension)
     }
     static func playHighScoreSound() {
-        playASound(soundFileName: "newHighScore", fileExtension: "mp3")
+        playASound(soundFileName: AppConfig.newHighScore, fileExtension: AppConfig.mp3Extension)
     }
     static func playGameOverSound() {
-        playASound(soundFileName: "gameOver", fileExtension: "mp3")
+        playASound(soundFileName: AppConfig.gameOverSound, fileExtension: AppConfig.mp3Extension)
+    }
+    static func playGoGoGoSound() {
+        playASound(soundFileName: AppConfig.goGoGoSound, fileExtension: AppConfig.mp3Extension)
     }
     
     static func playASound(soundFileName: String, fileExtension: String){
@@ -34,6 +37,7 @@ class PlaySound{
         } catch let error {
             print(error.localizedDescription)
         }
+        
         PlaySound.player!.prepareToPlay()
         PlaySound.player!.play()
     }

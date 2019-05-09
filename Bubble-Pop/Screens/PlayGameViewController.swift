@@ -19,7 +19,6 @@ class PlayGameViewController: UIViewController {
     @IBOutlet weak var startGameTimerLbl: UILabel!
     @IBOutlet weak var buttonGroupStack: UIView!
     @IBOutlet weak var playerNameLbl: UILabel!
-    
     @IBOutlet weak var eatingBubbleImgView: UIImageView!
     @IBOutlet weak var bottomView: UIView!
     @IBOutlet weak var scoreView: UIView!
@@ -53,51 +52,27 @@ class PlayGameViewController: UIViewController {
         // Show start game countdown and after that start playing game
         self.showStartGameCountdown()
     }
+    
     @IBAction func bubbleIsTouched(_ sender: Bubble){
-        let scoreLbl = self.eatingBubbleImgView.center
-        let locScoreView = self.stackViewContainsEatBubble.convert(scoreLbl, to: self.bottomView)
+    
+        // set the scoreView go into the bottom
+        self.scoreView.layer.zPosition = AppConfig.onBottomZIndex
         
-        let img1 = UIImage(named: "eat-5")!
-        let img2 = UIImage(named: "eat-6")!
-        let img3 = UIImage(named: "eat-4")!
-        
-        let img4 = UIImage(named: "eat-3")!
-        let img5 = UIImage(named: "eat-2")!
-        let img6 = UIImage(named: "eat-1")!
-        
-        PlaySound.playBubbleSound()
-        
-        self.eatingBubbleImgView.layer.zPosition = 1.0
-        
-        var animatedImage = UIImage.animatedImage(with: [img1, img2, img3], duration: 5)
-        sender.layer.zPosition = 1.0
-        self.scoreView.layer.zPosition = 0.1
-        
-        sender.timer?.invalidate()
-        
-        Utils.changeFrame(view: sender, toOriginX: locScoreView.x, toOriginY: locScoreView.y, toWidth: 5,  toHeight: 5, duration: 1)
-        print("Get touch event")
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
-            self.eatingBubbleImgView.image = animatedImage
-        }
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            animatedImage = UIImage.animatedImage(with: [img4, img5, img6], duration: 0.5)
-            self.eatingBubbleImgView.image = animatedImage
-        }
         let bubble = sender
-        self.updateViewAfterTouchBubble(bubble: bubble)
-        //        bubble.removeFromSuperview()
         
+        // Show pop bubble animation 
+        BubbleAnimation.popBubble(bubble: bubble, bubbleDisplayFrame: self.bubbleDisplayFrame)
+        // Update the uiview after bubble is popped
+        self.updateViewAfterTouchBubble(bubble: bubble)
     }
+    
     //When btn play again is tapped, the segue would call this current VC and this function is triggered to remove all the history VC
     @IBAction func playAgainTapped(_ sender: UIButton) {
         
-        var navigationArray = self.navigationController?.viewControllers //To get all UIViewController stack as Array
+        // Get all current view controllers in controller stack
+        var navigationArray = self.navigationController?.viewControllers
         navigationArray!.remove(at: (navigationArray?.count)! - 2) // To remove previous UIViewController
         self.navigationController?.viewControllers = navigationArray!
-        
     }
     
     // unbind the timer at the current screen
@@ -118,9 +93,14 @@ class PlayGameViewController: UIViewController {
             if self.bubbleList.count != 0{
                 //Remove all bubble on screen
                 self.stuffedBubble.removeAllBubble(bubbleList: self.bubbleList)
-                // Generate all new bubble
+                
+                // Reset the frame when the orentation of the devide is changed
                 self.stuffedBubble.refreshBubbleDisplayFrame(playGameScreen: self)
+                
+                // Generate all new bubble
                 self.bubbleList = self.stuffedBubble.sprawBubblesToFrame(numberOfBubbles: self.bubbleList.count,currentBubbleList: [])
+                
+                // Reset bubble velocity
                 self.stuffedBubble.resetBubbleVelocity(bubbleList:self.bubbleList)
             }
         })
@@ -140,6 +120,7 @@ class PlayGameViewController: UIViewController {
         return self.bubbleDisplayFrame
     }
     
+    // Show start game coundown to start game
     private func showStartGameCountdown(){
         // Show timer to start game
         var startTimeCountDown = 2
@@ -151,12 +132,21 @@ class PlayGameViewController: UIViewController {
             
             print (startTimeCountDown)
             if startTimeCountDown == 0{
+                // Play sound
+                PlaySound.playGoGoGoSound()
                 self.startGameTimerLbl.isHidden = true
                 startGameTimer.invalidate()
                 
-                // Triiger function to playing game
-                self.stuffedBubble.refreshBubbleDisplayFrame(playGameScreen: self)
-                self.startPlayingGame()
+                // Show bubble after the sound is played
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    // Disable the lable in the view
+                    
+                    // Triiger function to playing game
+                    self.stuffedBubble.refreshBubbleDisplayFrame(playGameScreen: self)
+                    // Start playing the game
+                    self.startPlayingGame()
+                }
+                
             }
             startTimeCountDown -= 1
         }
@@ -178,21 +168,26 @@ class PlayGameViewController: UIViewController {
                 self.timerLbl.text = String(self.gameDurationCountdown)
                 self.timerLbl.fadeTransition(AppConfig.fadeDuration)
                 
-                if count % 2 == 0{
+                // refresh bubble frame after 2 secs
+                if Utils.isEven(number: count){
                     // Refresh the bubble on frame
                     self.refreshBubbleFrame()
                 }
                 count += 1
             }else{
+                // Game is finhised
                 self.gameTimer?.invalidate()
                 self.endGame()
             }
         }
     }
+    
+    // Set up layout for end-game and check for the new highest one
     private func endGame(){
         //  Emnplty the bubble list
         self.bubbleList = []
         self.setupLayoutForGameEnding()
+        
         // Save score to db
         if self.currentScore != 0{
             self.ranking.persistNewScoring(playerName: self.playerName, score: Int16(self.currentScore))
@@ -202,33 +197,37 @@ class PlayGameViewController: UIViewController {
     private func setupLayoutForGameEnding(){
         // Disable all the touch event for bubble
         self.bubbleDisplayFrame.isUserInteractionEnabled = false
+        
         // Show the buttom button for going to ranking or replay the game
         self.buttonGroupStack.isHidden = false
-        self.buttonGroupStack.layer.zPosition = 1.0
+        self.buttonGroupStack.layer.zPosition = AppConfig.onTopZIndex
         
         // Blur the bubble display frame
-        self.bubbleDisplayFrame.layer.opacity = 0.5
-        self.bubbleDisplayFrame.layer.zPosition = 0.3
+        self.bubbleDisplayFrame.layer.opacity = AppConfig.layerOpacityHalf
+        self.bubbleDisplayFrame.layer.zPosition = AppConfig.bubbleZIndex
         
         // Show the first place
         if self.currentHighestScore == self.currentScore && self.currentHighestScore != 0{
             PlaySound.playHighScoreSound()
             self.topOneImgView.isHidden = false
-            self.topOneImgView.layer.zPosition = 1.0
+            self.topOneImgView.layer.zPosition = AppConfig.onTopZIndex
         }else{
             PlaySound.playGameOverSound()
             self.gameOverImgView.isHidden = false
-            self.gameOverImgView.layer.zPosition = 1.0
+            self.gameOverImgView.layer.zPosition = AppConfig.onTopZIndex
         }
     }
+    
     // Refresh bubble frame
     @objc private func refreshBubbleFrame(){
         // Remove random bubbles on the frame
         self.bubbleList  = self.stuffedBubble.removeBubbles(bubbleList: self.bubbleList)
         self.stuffedBubble.refreshBubbleDisplayFrame(playGameScreen: self)
+        
         // Generate new bubble
         let newBubbleNumber = self.maxBubblesOnFrame - self.bubbleList.count
         let newBubbleList =  self.stuffedBubble.sprawBubblesToFrame(numberOfBubbles: newBubbleNumber, currentBubbleList: self.bubbleList)
+        
         // Update new bubbles to current frame
         self.bubbleList = newBubbleList
         self.stuffedBubble.resetBubbleVelocity(bubbleList: newBubbleList)
@@ -243,25 +242,28 @@ class PlayGameViewController: UIViewController {
             bubbleScore = Int((Float(bubble.points.rawValue) * AppConfig.similarCategoryScoreRate))
         }
         self.currentScore += bubbleScore
-        
         // Update to view
         self.scoreLbl.text = String(self.currentScore)
         self.scoreLbl.fadeTransition(AppConfig.fadeDuration)
         
         // Check if the current score is the highest score
         self.updateTopScoring()
-        
         //Set the last bubble
         self.lastBubblePoint = bubble.points.rawValue
     }
     
+    // Change layout if this current is the new highest one
     private func updateTopScoring(){
         if self.currentHighestScore < self.currentScore{
             self.currentHighestScore = self.currentScore
             self.topOneScoringLbl.text = String(self.currentScore)
+            
+            // Check if new score is the new highest one
             if !self.isNewTopOne{
+                // Play sound for highest one score
                 PlaySound.playHighScoreSound()
                 let position = self.scoreLbl.frame.origin
+                
                 // Show animation for new top 1 user
                 BubbleAnimation.showTopOneAnimation(component: self.topOneImgView, container: self.bubbleDisplayFrame, position: position)
                 
@@ -270,6 +272,7 @@ class PlayGameViewController: UIViewController {
         }
     }
     
+    // Initialisation setup screen layout
     private func setupScreenLayout(){
         //Set user player name
         self.playerNameLbl.text = "\(self.playerName)'s score"
@@ -279,6 +282,7 @@ class PlayGameViewController: UIViewController {
         self.timerLbl.text = String(self.gameDuration)
         self.scoreLbl.text = String(self.currentScore)
         
+        // Assign the game duration for game timer coundown
         self.gameDurationCountdown = self.gameDuration
         
         //Get highest score

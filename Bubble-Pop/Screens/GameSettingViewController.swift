@@ -25,16 +25,15 @@ class GameSettingViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Set up view
+        // Set value for the labels
         self.gameDurationLbl.text = "\(GameSettingViewController.gameDuration)s"
         self.numberOfBubbleLbl.text = "\(GameSettingViewController.numberOfBUbbles)"
+        // Set value for the sliders
         self.numberOfBubblesSlider.value = Float(GameSettingViewController.numberOfBUbbles)
         self.gameDurationSlider.value = Float(GameSettingViewController.gameDuration)
-        
         // Set the current static to current setting
         self.currentGameDuration = GameSettingViewController.gameDuration
         self.currentNumberOfBubbles = GameSettingViewController.numberOfBUbbles
-        
     }
     
     @IBAction func durationSlideChanged(_ sender: UISlider) {
@@ -49,13 +48,14 @@ class GameSettingViewController: UITableViewController {
         numberOfBubbleLbl.text = "\(sliderValue)"
     }
     
+    // Save the current settinfg
     @IBAction func saveSetting(_ sender: Any) {
         GameSettingViewController.gameDuration = self.currentGameDuration
         GameSettingViewController.numberOfBUbbles = self.currentNumberOfBubbles
-        
         // return to the setting controller
         _ = self.navigationController?.popViewController(animated: true)
     }
+    // Getter and setter
     public static func getGameDuration() -> Int{
         return GameSettingViewController.gameDuration
     }
@@ -68,14 +68,4 @@ class GameSettingViewController: UITableViewController {
     public  func setNumberOfBubble(numberOfBubble: Int){
         GameSettingViewController.numberOfBUbbles = numberOfBubble
     }
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
 }

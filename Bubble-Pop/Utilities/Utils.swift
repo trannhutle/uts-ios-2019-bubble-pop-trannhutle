@@ -9,19 +9,26 @@
 import Foundation
 import UIKit
 class Utils {
+    
+    // Random the float number
     static func randomProbability() -> Float{
         return Float(Float(arc4random()) / Float(UINT32_MAX))
     }
+    
+    // Random the position what inside the frame
     static func randomPositionInsideFrame(maxX: Float, offsetX: Float, maxY: Float, offsetY: Float) -> CGPoint {
         let x = CGFloat( self.randomProbability() * maxX + offsetX)
         let y = CGFloat( self.randomProbability() * maxY + offsetY)
         return CGPoint(x: x, y: y)
     }
     
+    // Random the float number between range number
     static func randomFloatBetween(smallNumber: Float, bigNumber: Float) -> Float {
         let diff: Float = bigNumber - smallNumber
         return ((Float(UInt(arc4random()) % (UInt(RAND_MAX) + 1)) / Float(RAND_MAX)) * diff) + smallNumber
     }
+    
+    // Random the list of integer smaller than n number
     static func randomIntInRange(maxNumber: Int) -> [Int]{
         var randomNunbers  = Set<Int>()
         
@@ -61,6 +68,7 @@ class Utils {
             view.removeFromSuperview()
         }
     }
+    
     static func copyUIImageViewIntance(uiImageView: UIImageView)  -> UIImageView{
         let uiImageViewCp = UIImageView()
         uiImageViewCp.frame.origin.x = uiImageView.frame.origin.x

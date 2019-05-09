@@ -27,6 +27,8 @@ class Bubble: UIButton{
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    // This function is used for drawing the CGRect to the bubble
     override func draw(_ rect: CGRect) {
         
         let halfSize:CGFloat = min( bounds.size.width/2, bounds.size.height/2)
@@ -49,6 +51,7 @@ class Bubble: UIButton{
         layer.addSublayer(shapeLayer)
         
     }
+    //  Bubble initialisation
     override init(frame: CGRect){
         super.init(frame: frame)
         
@@ -76,6 +79,7 @@ class Bubble: UIButton{
         self.setVelocity()
     }
     
+    // Set the bubble velocity, it would be called when the device is changed orentation, create new bubble
     func setVelocity() {
         self.velocity = Double(-1.0)
 

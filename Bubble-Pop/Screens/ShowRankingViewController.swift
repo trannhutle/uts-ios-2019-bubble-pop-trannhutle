@@ -14,15 +14,11 @@ class ShowRankingViewController: UITableViewController {
     var standingList: [Score] = []
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Do any additional setup after loading the view.
     }
     override func viewWillAppear(_ animated: Bool) {
         self.standingList = self.ranking.getUserScoringListDesc()
     }
-    // MARK: - Table view data source
     
-
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -40,12 +36,13 @@ class ShowRankingViewController: UITableViewController {
         
         var cell:UITableViewCell
         
+        // Check if the cell is the top one cell or not, apply different style for the top one cell
         if indexPath.row == 0{
             cell = tableView.dequeueReusableCell(withIdentifier: AppConfig.firstCell, for: indexPath)
         }else{
             cell = tableView.dequeueReusableCell(withIdentifier: AppConfig.normalCell, for: indexPath)
         }
-        
+        // Change layout for cells
         if Utils.isEven(number: indexPath.row){
             cell.backgroundColor = UIColor.BubbleColor.white
         }
@@ -55,6 +52,6 @@ class ShowRankingViewController: UITableViewController {
         
         return cell
     }
-   
-
+    
+    
 }

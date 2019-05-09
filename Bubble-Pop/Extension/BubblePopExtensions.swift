@@ -35,6 +35,7 @@ extension UIColor{
     }
 }
 extension UIView {
+    // Fade transition the view animation
     func fadeTransition(_ duration:CFTimeInterval) {
         let animation = CATransition()
         animation.timingFunction = CAMediaTimingFunction(name:
@@ -44,6 +45,8 @@ extension UIView {
         animation.isRemovedOnCompletion = true
         layer.add(animation, forKey: CATransitionType.fade.rawValue)
     }
+    
+    // Fade delete the bubble on the screen
     func fadeDelete(_ duration:CFTimeInterval) {
         UIView.animate(withDuration: duration, delay: 0.0, options: UIView.AnimationOptions.curveEaseIn, animations: {
             self.alpha = 0.0
@@ -54,8 +57,10 @@ extension UIView {
 }
 
 extension UIViewController{
+    // Hide keyboard
     func hideKeyboard(){
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tap.cancelsTouchesInView = false
         self.view.addGestureRecognizer(tap)
     }
     @objc func dismissKeyboard(){

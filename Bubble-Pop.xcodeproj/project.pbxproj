@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B61026782283C79E00FF6989 /* goGoGo.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B61026772283C79E00FF6989 /* goGoGo.mp3 */; };
 		B610594D2282DC2200058DB5 /* PlaySound.swift in Sources */ = {isa = PBXBuildFile; fileRef = B610594C2282DC2200058DB5 /* PlaySound.swift */; };
 		B610594F2282E1F000058DB5 /* bubblePopSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B610594E2282E1F000058DB5 /* bubblePopSound.mp3 */; };
 		B61059542282EA0A00058DB5 /* gameOver.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B61059532282EA0A00058DB5 /* gameOver.mp3 */; };
@@ -25,16 +26,15 @@
 		B6161742227999F800D93B2B /* Bubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6161741227999F800D93B2B /* Bubble.swift */; };
 		B61617452279E67900D93B2B /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61617442279E67900D93B2B /* Utils.swift */; };
 		B618A052225B2293002CD8BF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B618A051225B2293002CD8BF /* AppDelegate.swift */; };
-		B618A054225B2293002CD8BF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B618A053225B2293002CD8BF /* ViewController.swift */; };
 		B618A057225B2293002CD8BF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B618A055225B2293002CD8BF /* Main.storyboard */; };
 		B618A05C225B2294002CD8BF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B618A05B225B2294002CD8BF /* Assets.xcassets */; };
-		B618A05F225B2294002CD8BF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B618A05D225B2294002CD8BF /* LaunchScreen.storyboard */; };
-		B618A067225B2702002CD8BF /* StartGameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B618A066225B2702002CD8BF /* StartGameController.swift */; };
+		B618A067225B2702002CD8BF /* StartGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B618A066225B2702002CD8BF /* StartGameViewController.swift */; };
 		B6617A5E2276D55E00635984 /* PlayGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6617A5D2276D55E00635984 /* PlayGameViewController.swift */; };
 		B66D0A662275DEDD003F3658 /* GameSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66D0A652275DEDD003F3658 /* GameSettingViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B61026772283C79E00FF6989 /* goGoGo.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = goGoGo.mp3; sourceTree = "<group>"; };
 		B610594C2282DC2200058DB5 /* PlaySound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaySound.swift; sourceTree = "<group>"; };
 		B610594E2282E1F000058DB5 /* bubblePopSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bubblePopSound.mp3; sourceTree = "<group>"; };
 		B61059532282EA0A00058DB5 /* gameOver.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = gameOver.mp3; sourceTree = "<group>"; };
@@ -53,13 +53,11 @@
 		B61617442279E67900D93B2B /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		B618A04E225B2293002CD8BF /* Bubble-Pop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bubble-Pop.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B618A051225B2293002CD8BF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		B618A053225B2293002CD8BF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		B618A056225B2293002CD8BF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B618A059225B2293002CD8BF /* Bubble_Pop.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Bubble_Pop.xcdatamodel; sourceTree = "<group>"; };
 		B618A05B225B2294002CD8BF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		B618A05E225B2294002CD8BF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B618A060225B2294002CD8BF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B618A066225B2702002CD8BF /* StartGameController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartGameController.swift; sourceTree = "<group>"; };
+		B618A066225B2702002CD8BF /* StartGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartGameViewController.swift; sourceTree = "<group>"; };
 		B6617A5D2276D55E00635984 /* PlayGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayGameViewController.swift; sourceTree = "<group>"; };
 		B66D0A652275DEDD003F3658 /* GameSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSettingViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -75,9 +73,36 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B61026742283B79700FF6989 /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				B618A051225B2293002CD8BF /* AppDelegate.swift */,
+			);
+			path = Delegates;
+			sourceTree = "<group>";
+		};
+		B61026752283B7BD00FF6989 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				B61059522282E86000058DB5 /* Sounds */,
+				B618A05B225B2294002CD8BF /* Assets.xcassets */,
+				B6136688227B59740016DC2A /* Images.xcassets */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		B61026762283B7E100FF6989 /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				B618A058225B2293002CD8BF /* Bubble_Pop.xcdatamodeld */,
+			);
+			path = Database;
+			sourceTree = "<group>";
+		};
 		B61059522282E86000058DB5 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				B61026772283C79E00FF6989 /* goGoGo.mp3 */,
 				B61059552282FB6A00058DB5 /* newHighScore.mp3 */,
 				B61059532282EA0A00058DB5 /* gameOver.mp3 */,
 				B610594E2282E1F000058DB5 /* bubblePopSound.mp3 */,
@@ -165,7 +190,9 @@
 		B618A050225B2293002CD8BF /* Bubble-Pop */ = {
 			isa = PBXGroup;
 			children = (
-				B61059522282E86000058DB5 /* Sounds */,
+				B61026762283B7E100FF6989 /* Database */,
+				B61026752283B7BD00FF6989 /* Assets */,
+				B61026742283B79700FF6989 /* Delegates */,
 				B61242FC227D49E400525547 /* Control Layouts */,
 				B613667E227B398B0016DC2A /* Entities */,
 				B613667B227AE0E50016DC2A /* Storyboards */,
@@ -174,13 +201,7 @@
 				B61617432279E2D700D93B2B /* Utilities */,
 				B6161740227999CB00D93B2B /* Classes */,
 				B6617A5F2276D6C200635984 /* Screens */,
-				B618A051225B2293002CD8BF /* AppDelegate.swift */,
-				B618A053225B2293002CD8BF /* ViewController.swift */,
-				B618A05B225B2294002CD8BF /* Assets.xcassets */,
-				B618A05D225B2294002CD8BF /* LaunchScreen.storyboard */,
 				B618A060225B2294002CD8BF /* Info.plist */,
-				B618A058225B2293002CD8BF /* Bubble_Pop.xcdatamodeld */,
-				B6136688227B59740016DC2A /* Images.xcassets */,
 			);
 			path = "Bubble-Pop";
 			sourceTree = "<group>";
@@ -188,7 +209,7 @@
 		B6617A5F2276D6C200635984 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				B618A066225B2702002CD8BF /* StartGameController.swift */,
+				B618A066225B2702002CD8BF /* StartGameViewController.swift */,
 				B66D0A652275DEDD003F3658 /* GameSettingViewController.swift */,
 				B6617A5D2276D55E00635984 /* PlayGameViewController.swift */,
 				B614B861227C3FB1005E58FC /* ShowRankingViewController.swift */,
@@ -254,11 +275,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B618A05F225B2294002CD8BF /* LaunchScreen.storyboard in Resources */,
 				B6136689227B59740016DC2A /* Images.xcassets in Resources */,
 				B61059542282EA0A00058DB5 /* gameOver.mp3 in Resources */,
 				B618A05C225B2294002CD8BF /* Assets.xcassets in Resources */,
 				B61059562282FB6A00058DB5 /* newHighScore.mp3 in Resources */,
+				B61026782283C79E00FF6989 /* goGoGo.mp3 in Resources */,
 				B618A057225B2293002CD8BF /* Main.storyboard in Resources */,
 				B610594F2282E1F000058DB5 /* bubblePopSound.mp3 in Resources */,
 				B6136687227B4AEE0016DC2A /* EnglishInfoPlist.strings in Resources */,
@@ -272,7 +293,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B618A054225B2293002CD8BF /* ViewController.swift in Sources */,
 				B618A052225B2293002CD8BF /* AppDelegate.swift in Sources */,
 				B613667A227AC05E0016DC2A /* AppConfig.swift in Sources */,
 				B61617452279E67900D93B2B /* Utils.swift in Sources */,
@@ -284,7 +304,7 @@
 				B61242FE227D4A3C00525547 /* BubbleAppButtons.swift in Sources */,
 				B66D0A662275DEDD003F3658 /* GameSettingViewController.swift in Sources */,
 				B6136680227B39A70016DC2A /* Score.swift in Sources */,
-				B618A067225B2702002CD8BF /* StartGameController.swift in Sources */,
+				B618A067225B2702002CD8BF /* StartGameViewController.swift in Sources */,
 				B613667D227B34E80016DC2A /* Ranking.swift in Sources */,
 				B614B860227C36B2005E58FC /* Animation.swift in Sources */,
 				B6136675227A717C0016DC2A /* StuffedBubble.swift in Sources */,
@@ -301,14 +321,6 @@
 				B618A056225B2293002CD8BF /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		B618A05D225B2294002CD8BF /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				B618A05E225B2294002CD8BF /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -433,7 +445,6 @@
 		B618A064225B2294002CD8BF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-2";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = K6K68ZW3TZ;
 				INFOPLIST_FILE = "Bubble-Pop/Info.plist";
@@ -451,7 +462,6 @@
 		B618A065225B2294002CD8BF /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-2";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = K6K68ZW3TZ;
 				INFOPLIST_FILE = "Bubble-Pop/Info.plist";
